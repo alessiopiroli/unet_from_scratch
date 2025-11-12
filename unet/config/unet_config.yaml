@@ -1,0 +1,21 @@
+DATA:
+  batch_size: 16
+  n_classes: 21
+  root_dir: "data"
+
+  trainval_image_dir: "data/VOC2012_train_val/VOC2012_train_val/JPEGImages"
+  trainval_mask_dir: "data/VOC2012_train_val/VOC2012_train_val/SegmentationClass"
+  
+  test_image_dir: "data/VOC2012_test/VOC2012_test/JPEGImages"
+  test_mask_dir: ""
+
+  train_set_file: "data/VOC2012_train_val/VOC2012_train_val/ImageSets/Segmentation/train.txt"
+  val_set_file: "data/VOC2012_train_val/VOC2012_train_val/ImageSets/Segmentation/val.txt"
+  test_set_file: "data/VOC2012_test/VOC2012_test/ImageSets/Segmentation/test.txt"
+
+  image_size: 256
+  num_workers: 4
+  TRANSFORMS:
+    normalize_mean: [0.458, 0.456, 0.406]
+    normalize_std: [0.229, 0.224, 0.225]
+    train_random_flip_prob: 0.5
