@@ -4,8 +4,6 @@ import os
 from PIL import Image
 import random
 import torchvision.transforms.functional as TF
-# import torchvision.transforms.functional
-
 
 class VOCSegmentationDataset(Dataset):
     def __init__(self, cfg, mode="train"):
