@@ -27,4 +27,4 @@ jobs:
           
     - name: Run tests
       run: |
-        pytest -m pytest unet/test/
+        python -m pytest unet/test/
