@@ -16,11 +16,8 @@ def test_model_forward_pass_shape():
     out_channels = cfg.MODEL.out_channels
 
     model = UNet(cfg)
-
+    
     dummy_input = torch.randn(batch_size, in_channels, img_size, img_size)
-
     output = model(dummy_input)
-
     expected_shape = (batch_size, out_channels, img_size, img_size)
-
     assert output.shape == expected_shape
