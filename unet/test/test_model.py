@@ -15,19 +15,12 @@ def test_model_forward_pass_shape():
     in_channels = cfg.MODEL.in_channels
     out_channels = cfg.MODEL.out_channels
 
-    try:
-        model = UNet(cfg)
-    except Exception as e:
-        assert False, f"Failed to isntantiate UNet model: {e}"
+    model = UNet(cfg)
 
     dummy_input = torch.randn(batch_size, in_channels, img_size, img_size)
 
-    try:
-        output = model(dummy_input)
-    except Exception as e:
-        assert False, f"Model forward pass failed: {e}"
+    output = model(dummy_input)
 
     expected_shape = (batch_size, out_channels, img_size, img_size)
 
-    assert output.shape == expected_shape, \
-        f"Output shape is incorrect. Expected {expected_shape}, but got {output.shape}"
+    assert output.shape == expected_shape
