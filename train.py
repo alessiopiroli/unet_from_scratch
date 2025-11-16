@@ -38,15 +38,17 @@ def compute_loss(output, labels):
 
 
 def train_one_epoch(model, train_dataloader, optimizer):
+    epoch_loss = 0.0
     for img, labels in train_dataloader:
         img, labels = img.cuda(), labels.cuda()
         optimizer.zero_grad()
         output = model(img)
         loss = compute_loss(output, labels)
+        epoch_loss += loss.item()
         loss.backward()
         optimizer.step()
 
-    return loss
+    return epoch_loss / len(train_dataloader)
 
 
 def train(model, train_dataloader):
