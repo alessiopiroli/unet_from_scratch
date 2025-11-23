@@ -2,6 +2,11 @@ import yaml
 from easydict import EasyDict as edict
 import matplotlib.pyplot as plt
 import torch
+import time
+import os
+import logging
+from torch.utils.tensorboard import SummaryWriter
+from PIL import Image
 
 def load_config(config_path):
     with open(config_path, 'r') as f:
@@ -35,3 +40,31 @@ def plot_images_to_file(images, filename="tmp.png"):
     plt.tight_layout()
     plt.savefig(filename, bbox_inches="tight", pad_inches=0)
     plt.close()
+
+def setup_logging(config):
+    base_dir = config.LOGGING.logging_dir
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    experiment_dir = os.path.join(base_dir, f'exp_{timestamp}')
+    os.makedirs(experiment_dir, exist_ok=True)
+    
+    log_file = os.path.join(experiment_dir, "log.log")
+    logger = logging.getLogger("logger")
+    logger.setLevel(logging.INFO)
+    
+    if not logger.handlers:
+        fh = logging.FileHandler(log_file, mode="a")
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+
+        ch = logging.StreamHandler()
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+        
+    tb_dir = os.path.join(experiment_dir, "tensorboard")
+    os.makedirs(tb_dir, exist_ok=True)
+    writer = SummaryWriter(log_dir=tb_dir)
+    
+    logger.info(f"Experiment logs saved to: {experiment_dir}")
+    
+    return logger, writer, experiment_dir
