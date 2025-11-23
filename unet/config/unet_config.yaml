@@ -1,17 +1,10 @@
 DATA:
-  batch_size: 16
-  n_classes: 21
-  root_dir: "data"
+  batch_size: 4
+  n_classes: 2
 
-  trainval_image_dir: "data/VOC2012_train_val/VOC2012_train_val/JPEGImages"
-  trainval_mask_dir: "data/VOC2012_train_val/VOC2012_train_val/SegmentationClass"
-  
-  test_image_dir: "data/VOC2012_test/VOC2012_test/JPEGImages"
-  test_mask_dir: ""
-
-  train_set_file: "data/VOC2012_train_val/VOC2012_train_val/ImageSets/Segmentation/train.txt"
-  val_set_file: "data/VOC2012_train_val/VOC2012_train_val/ImageSets/Segmentation/val.txt"
-  test_set_file: "data/VOC2012_test/VOC2012_test/ImageSets/Segmentation/test.txt"
+  root_dir: "data/oxford_pets_dataset"
+  train_split_file: "annotations/trainval.txt"
+  test_file: "annotations/test.txt"
 
   image_size: 256
   num_workers: 4
@@ -23,5 +16,13 @@ DATA:
 
 MODEL:
   in_channels: 3
-  out_channels: 21
+  out_channels: 2
   base_channels: 64
+
+TRAIN:
+  num_epochs: 50
+  lr: 0.0001
+
+LOGGING:
+  logging_dir: "artifacts/logs"
+  images_dir: "artifacts/images/"
