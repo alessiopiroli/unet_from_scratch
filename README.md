@@ -28,4 +28,4 @@ python evaluate.py unet/config/unet_config.yaml path/to/ckpt.pt
 ### Qualitative Results
 > Qualitative semantic segmentation results on the Oxford-IIIT Pet Dataset validation split, with the UNet model trained from scratch for 30 epochs.
 >
-> ![](assets/training.gif)
+> ![](assets/predict.gif)
